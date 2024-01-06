@@ -1,0 +1,52 @@
+""" Question: Design a UserProfile class with public attributes for username and email.
+Add private attributes for _password and _security_question.
+Implement methods to get and set these attributes securely."""
+
+# UserProfile Class
+
+class UserProfile:
+    def __init__(self, username, email, password, security_question):
+        self.username = username
+        self.email = email
+        self._password = password  # Private attribute
+        self._security_question = security_question  # Private attribute
+
+    # Getter method for password
+    def get_password(self):
+        return self._password
+
+    # Setter method for password with additional security checks
+    def set_password(self, current_password, new_password):
+        if current_password == self._password:
+            self._password = new_password
+            print("Password successfully updated.")
+        else:
+            print("Invalid current password. Password not updated.")
+
+    # Getter method for security question
+    def get_security_question(self):
+        return self._security_question
+
+    # Setter method for security question
+    def set_security_question(self, new_security_question):
+        self._security_question = new_security_question
+        print("Security question successfully updated.")
+
+# Example usage:
+
+# Create a user profile
+user_profile = UserProfile("walid khan", "walid@gmail.com", "password123", "What is your favorite color?")
+
+# Print the current values
+print("Username:", user_profile.username)
+print("Email:", user_profile.email)
+print("Password:", user_profile.get_password())  # Access through getter method
+print("Security Question:", user_profile.get_security_question())  # Access through getter method
+
+# Update password and security question
+user_profile.set_password("password123", "newpassword456")
+user_profile.set_security_question("What is your pet's name?")
+
+# Print updated values
+print("Updated Password:", user_profile.get_password())
+print("Updated Security Question:", user_profile.get_security_question())
