@@ -1,0 +1,57 @@
+# Question: Create an online quiz system with classes like Quiz, Question, and User.
+# Allow users to take quizzes, track their scores, and provide feedback on their performance.
+
+# Question Class
+class Question:
+    def __init__(self, text, options, correct_option):
+        self.text = text
+        self.options = options
+        self.correct_option = correct_option
+
+    def display_question(self):
+        print(self.text)
+        for i, option in enumerate(self.options, start=1):
+            print(f"{i}. {option}")
+
+    def check_answer(self, user_answer):
+        return user_answer == self.correct_option
+
+
+# Quiz Class
+class Quiz:
+    def __init__(self, name, questions):
+        self.name = name
+        self.questions = questions
+        self.scores = {}
+
+    def take_quiz(self, user):
+        print(f"Welcome to the {self.name} quiz, {user.username}!")
+        score = 0
+
+        for i, question in enumerate(self.questions, start=1):
+            print(f"\nQuestion {i}:")
+            question.display_question()
+            user_answer = int(input("Your answer (enter the option number): "))
+
+            if question.check_answer(user_answer):
+                print("Correct!")
+                score += 1
+            else:
+                print("Incorrect.")
+
+        print(f"\nQuiz Completed! Your score: {score}/{len(self.questions)}")
+        self.scores[user.username] = score
+
+    def get_score(self, user):
+        return self.scores.get(user.username, "User hasn't taken the quiz yet.")
+
+
+# User Class
+class User:
+    def __init__(self, username):
+        self.username = username
+
+# Example Usage:
+
+# Create questions
+question1 = Question("What is the capital of France?", ["Paris", "Berlin
